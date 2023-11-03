@@ -2,10 +2,10 @@
 import { Routes, Route } from "react-router-dom";
 
 //내부 import
-import List from "./pages/List";
-import Search from "./pages/Search";
+import List from "./pages/List/List";
+import Search from "./pages/Search/Search";
 
-export default function App() {
+export default function Appㅂ() {
   return (
     <Routes>
       <Route path="/" element={<List />}></Route>
