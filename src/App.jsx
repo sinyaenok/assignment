@@ -1,5 +1,15 @@
-function App() {
-  return <div>안녕하세요</div>;
-}
+//외부 import
+import { Routes, Route } from "react-router-dom";
 
-export default App;
+//내부 import
+import Inquiry from "./pages/Inquiry";
+import Search from "./pages/Search";
+
+export default function App() {
+  return (
+    <Routes>
+      <Route path="/inquiry" element={<Inquiry />}></Route>
+      <Route path="/search" element={<Search />}></Route>
+    </Routes>
+  );
+}
