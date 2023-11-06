@@ -43,7 +43,7 @@ const List = ({ carList, loading }) => {
   //버튼 클릭시 이동
   const navigate = useNavigate();
   const navigateToSearch = () => {
-    navigate("/search");
+    navigate("/assignment/search");
   };
 
   return (

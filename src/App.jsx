@@ -26,10 +26,10 @@ function App() {
   return (
     <Routes>
       <Route
-        path="/"
+        path="/assignment"
         element={<List carList={carList} loading={loading} />}
       ></Route>
-      <Route path="/search" element={<Search />}></Route>
+      <Route path="/assignment/search" element={<Search />}></Route>
     </Routes>
   );
 }
