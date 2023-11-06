@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid"; //랜덤 id 생성
 
 const List = ({ carList, loading }) => {
-  //차량 리스트 받아옴
   const [searchResult, setSearchResult] = useState("");
   const [filteredResults, setFilteredResults] = useState(carList); //엔터 누르면 검색어가 여기 담김
 
@@ -43,7 +42,7 @@ const List = ({ carList, loading }) => {
   //버튼 클릭시 이동
   const navigate = useNavigate();
   const navigateToSearch = () => {
-    navigate("/assignment/search");
+    navigate("/newassi/search");
   };
 
   return (
