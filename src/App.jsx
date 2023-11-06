@@ -18,12 +18,12 @@ function App() {
       .then((response) => {
         setCarList(response.data);
         setLoading(false);
-        console.log("carList 받아오기 성공", carList);
+        console.log("carList 성공", carList);
       })
       .catch((err) => {
         console.log(err);
         setLoading(false);
-        console.log("carList 받아오기 실패", carList);
+        console.log("carList 실패", carList);
       });
   }, []);
   return (
