@@ -1,44 +1,34 @@
 //외부
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { v4 as uuidv4 } from "uuid"; //랜덤 id 생성
+import axios from "axios";
 
-const List = ({ carList, loading }) => {
-  const [searchResult, setSearchResult] = useState("");
-  const [filteredResults, setFilteredResults] = useState(carList); //엔터 누르면 검색어가 여기 담김
+//내부
+import ListSearch from "./components/ListSearch";
 
-  //입력창 이벤트
-  const onChangeSearchResult = (event) => {
-    setSearchResult(event.target.value);
-  };
-  const handleSearchEnter = (event) => {
-    //1. 엔터를 눌렀는데
-    if (event.key === "Enter") {
-      event.preventDefault();
-      //1-1. 빈문자열이 아닌 경우
-      if (searchResult !== "") {
-        //차량 리스트 배열을 필터링함
-        const filterdData = carList.filter((data) => {
-          return Object.values(data.acCar)
-            .join("")
-            .toLowerCase()
-            .includes(searchResult.toLowerCase());
-        });
-        setFilteredResults(filterdData); //필터된 결과값을 담음
-      } else {
-        //1-2. 빈 문자열이면
-        setFilteredResults(carList); //모든 차량 리스트를 필터 결과값에 담음. (필터차량 초기화)
-        alert("검색어를 입력하세요");
-      }
-    }
-  };
+const List = () => {
+  const 빈배열 = ["빈배열"];
+  const API = import.meta.env.VITE_LIST_API; //서버 주소
+  const [apiData, setApiData] = useState(빈배열); //서버 데이터
+  const [loading, setLoading] = useState(false); // 로딩
 
-  const onClick = () => {
-    if (searchResult === "") {
-      alert("검색어를 입력하세요");
-    }
-  };
+  //첫 렌더링시 데이터 받아오기
+  useEffect(() => {
+    axios
+      .get(API)
+      .then((response) => {
+        setLoading(true);
+        console.log("loading 시작", loading);
+        setApiData(response.data);
+        setLoading(false);
+        console.log("loading 끝", loading);
+      })
+      .catch((error) => {
+        console.log(error.response);
+      });
+  }, []);
+  console.log(apiData);
   //버튼 클릭시 이동
   const navigate = useNavigate();
   const navigateToSearch = () => {
@@ -50,57 +40,9 @@ const List = ({ carList, loading }) => {
       <Header>
         <h1>내가 렌트 할 수 있는 차량은?</h1>
       </Header>
-      <Main>
-        <InputSection>
-          <Form onSubmit={(e) => e.preventDefault()}>
-            <div className="inputbox">
-              <input
-                className="input"
-                type="text"
-                placeholder="사고가 발생한 차량명을 입력해주세요."
-                value={searchResult}
-                onChange={onChangeSearchResult}
-                onKeyUp={handleSearchEnter}
-              />
-            </div>
-          </Form>
-          <div className="buttonbox">
-            <SearchBtn type="button" onClick={onClick}>
-              검색
-            </SearchBtn>
-          </div>
-        </InputSection>
-        <TableSection>
-          <table>
-            <thead>
-              <tr>
-                <th>날짜</th>
-                <th>사고차량</th>
-                <th>대여차량</th>
-              </tr>
-            </thead>
-            <tbody>
-              {loading ? (
-                <tr>
-                  <td>로딩중입니다. </td>
-                  <td>로딩중입니다. </td>
-                  <td>로딩중입니다. </td>
-                </tr>
-              ) : (
-                filteredResults?.map((data) => {
-                  return (
-                    <tr key={uuidv4()}>
-                      <td>{data.date}</td>
-                      <td>{data.acCar}</td>
-                      <td>{data.rtCar}</td>
-                    </tr>
-                  );
-                })
-              )}
-            </tbody>
-          </table>
-        </TableSection>
-      </Main>
+
+      <ListSearch apiData={apiData} loading={loading} />
+
       <Footer>
         <div className="linkBtnBox">
           <Button type="button" onClick={navigateToSearch}>
@@ -134,55 +76,6 @@ const Header = styled.header`
     padding: 16px 12px;
   }
 `;
-const Main = styled.main``;
-
-const InputSection = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  .buttonbox {
-    height: 45px;
-    width: 75px;
-  }
-`;
-const Form = styled.form`
-  width: 70%;
-  .inputbox {
-    padding: 12px;
-    border-radius: 3px;
-    border: 1px solid #000;
-  }
-  .input {
-    border: 0;
-    width: 100%;
-    outline: none;
-  }
-`;
-
-const TableSection = styled.section`
-  max-width: 800px;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  margin: 10px 0px 0px 0px;
-
-  table {
-    width: 100%;
-    border-spacing: 0px;
-  }
-  th {
-    font-size: 14px;
-    font-weight: 400;
-    padding: 4px 0px;
-    background: rgba(0, 0, 0, 0.1);
-  }
-  td {
-    font-size: 12px;
-    padding: 10px 0px;
-    border-top: 1px solid rgba(0, 0, 0, 0.25);
-  }
-`;
 
 const Footer = styled.footer`
   display: flex;
@@ -197,7 +90,4 @@ const Button = styled.button`
   padding: 8px 10px;
   height: 100%;
   width: 100%;
-`;
-const SearchBtn = styled(Button)`
-  margin-left: 5px;
 `;
