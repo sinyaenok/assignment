@@ -13,6 +13,7 @@ const List = () => {
   const [apiData, setApiData] = useState([]); //서버 데이터
   const [filteredApiData, setFilteredApiData] = useState([]); //필터링할 서버 데이터
   const [loading, setLoading] = useState(false); // 로딩
+  const [success, setSuccess] = useState(false);
 
   const API = import.meta.env.VITE_LIST_API; //서버 주소
 
@@ -28,14 +29,15 @@ const List = () => {
       })
       .catch((error) => {
         console.log(error.response);
+        setLoading(false);
       });
   }, []);
-
+  //검색어 이벤트 핸들링
   const inputChange = (e) => {
     setInputValue(e.target.value);
-    console.log(inputValue);
   };
 
+  //엔터키 눌렀을 때
   const onKeyDown = (e) => {
     if (e.key === "Enter") {
       e.preventDefault();
@@ -43,22 +45,37 @@ const List = () => {
     }
   };
 
+  //검색 버튼 클릭 시
   const onClick = (e) => {
     e.preventDefault();
     inputFilter();
   };
 
+  //검색어 필터링 함수
+
   const inputFilter = () => {
+    //1. 사용자가 검색어를 입력할 경우
     if (inputValue !== "") {
-      const filteredData = filteredApiData.filter((data) => {
-        return Object.values(data.acCar)
+      const filteredData = apiData.filter((data) => {
+        return Object.values(data.acCar) // 배열로 바꿈
           .join("")
           .toLowerCase()
-          .includes(inputValue.toLowerCase());
+          .includes(inputValue.toLowerCase()); //해당 배열을 뽑아냄. 없으면 없는 배열이 되는거임.
       });
-      setFilteredApiData(filteredData);
-    } else {
-      alert("검색어 입력하셈");
+      //1-1. 검색어가 있는 경우
+      if (filteredData.length > 0) {
+        setSuccess(false);
+        setFilteredApiData(filteredData);
+        //1-2. 검색어가 없는 경우
+      } else {
+        setSuccess(true);
+        setFilteredApiData(apiData);
+      }
+    }
+    //2. 사용자가 검색어를 입력하지 않을 경우
+    else {
+      alert("검색어를 입력해주세요.");
+      setSuccess(false);
       setFilteredApiData(apiData);
     }
   };
@@ -76,13 +93,16 @@ const List = () => {
       </Header>
       <main>
         <ListSearch
-          apiData={apiData}
           inputChange={inputChange}
           onKeyDown={onKeyDown}
           inputValue={inputValue}
           onClick={onClick}
         />
-        <ListTable loading={loading} filteredApiData={filteredApiData} />
+        <ListTable
+          loading={loading}
+          filteredApiData={filteredApiData}
+          success={success}
+        />
       </main>
 
       <Footer>

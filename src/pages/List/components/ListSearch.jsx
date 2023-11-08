@@ -4,14 +4,11 @@ import styled from "styled-components";
 //내부
 
 export default function ListSearch({
-  apiData,
   inputChange,
   onKeyDown,
   inputValue,
   onClick,
 }) {
-  console.log(apiData);
-
   return (
     <InputSection>
       <Form>

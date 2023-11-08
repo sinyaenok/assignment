@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid"; //랜덤 id 생성
 
 import Loading from "./Loading";
 
-const ListTable = ({ filteredApiData, loading }) => {
+const ListTable = ({ filteredApiData, loading, success }) => {
   return (
     <TableSection>
       <table>
@@ -18,6 +18,12 @@ const ListTable = ({ filteredApiData, loading }) => {
         <tbody>
           {loading ? (
             <Loading />
+          ) : success ? (
+            <tr>
+              <td></td>
+              <td>검색 차량이 없습니다.</td>
+              <td></td>
+            </tr>
           ) : (
             filteredApiData?.map((data) => {
               return (
