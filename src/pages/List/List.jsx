@@ -6,12 +6,15 @@ import axios from "axios";
 
 //내부
 import ListSearch from "./components/ListSearch";
+import ListTable from "./components/ListTable";
 
 const List = () => {
-  const 빈배열 = ["빈배열"];
-  const API = import.meta.env.VITE_LIST_API; //서버 주소
-  const [apiData, setApiData] = useState(빈배열); //서버 데이터
+  const [inputValue, setInputValue] = useState("");
+  const [apiData, setApiData] = useState([]); //서버 데이터
+  const [filteredApiData, setFilteredApiData] = useState([]); //필터링할 서버 데이터
   const [loading, setLoading] = useState(false); // 로딩
+
+  const API = import.meta.env.VITE_LIST_API; //서버 주소
 
   //첫 렌더링시 데이터 받아오기
   useEffect(() => {
@@ -19,16 +22,47 @@ const List = () => {
       .get(API)
       .then((response) => {
         setLoading(true);
-        console.log("loading 시작", loading);
         setApiData(response.data);
+        setFilteredApiData(response.data);
         setLoading(false);
-        console.log("loading 끝", loading);
       })
       .catch((error) => {
         console.log(error.response);
       });
   }, []);
-  console.log(apiData);
+
+  const inputChange = (e) => {
+    setInputValue(e.target.value);
+    console.log(inputValue);
+  };
+
+  const onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      inputFilter();
+    }
+  };
+
+  const onClick = (e) => {
+    e.preventDefault();
+    inputFilter();
+  };
+
+  const inputFilter = () => {
+    if (inputValue !== "") {
+      const filteredData = filteredApiData.filter((data) => {
+        return Object.values(data.acCar)
+          .join("")
+          .toLowerCase()
+          .includes(inputValue.toLowerCase());
+      });
+      setFilteredApiData(filteredData);
+    } else {
+      alert("검색어 입력하셈");
+      setFilteredApiData(apiData);
+    }
+  };
+
   //버튼 클릭시 이동
   const navigate = useNavigate();
   const navigateToSearch = () => {
@@ -40,8 +74,16 @@ const List = () => {
       <Header>
         <h1>내가 렌트 할 수 있는 차량은?</h1>
       </Header>
-
-      <ListSearch apiData={apiData} loading={loading} />
+      <main>
+        <ListSearch
+          apiData={apiData}
+          inputChange={inputChange}
+          onKeyDown={onKeyDown}
+          inputValue={inputValue}
+          onClick={onClick}
+        />
+        <ListTable loading={loading} filteredApiData={filteredApiData} />
+      </main>
 
       <Footer>
         <div className="linkBtnBox">

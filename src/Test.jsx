@@ -34,7 +34,7 @@ export default function Test() {
     }
   };
 
-  const onCliuck = (e) => {
+  const onClick = (e) => {
     e.preventDefault();
     inputFilter();
   };
@@ -64,7 +64,7 @@ export default function Test() {
             onKeyDown={onKeyDown}
             onChange={inputChange}
           />
-          <button onClick={onCliuck}>버튼</button>
+          <button onClick={onClick}>버튼</button>
         </form>
       </div>
       <div className="table">

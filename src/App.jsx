@@ -9,7 +9,7 @@ import Test from "./Test";
 function App() {
   return (
     <Routes>
-      <Route path="/newassi" element={<Test />}></Route>
+      <Route path="/newassi" element={<List />}></Route>
       <Route path="/newassi/search" element={<Search />}></Route>
     </Routes>
   );

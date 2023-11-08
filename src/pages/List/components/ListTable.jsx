@@ -2,7 +2,9 @@
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid"; //랜덤 id 생성
 
-const ListTable = ({ filteredResults, loading, apiData }) => {
+import Loading from "./Loading";
+
+const ListTable = ({ filteredApiData, loading }) => {
   return (
     <TableSection>
       <table>
@@ -14,26 +16,19 @@ const ListTable = ({ filteredResults, loading, apiData }) => {
           </tr>
         </thead>
         <tbody>
-          {loading
-            ? apiData.map((data) => {
-                return (
-                  <tr key={uuidv4()}>
-                    <td>로딩중</td>
-                    <td>{data.date}</td>
-                    <td>{data.acCar}</td>
-                    <td>{data.rtCar}</td>
-                  </tr>
-                );
-              })
-            : filteredResults.map((data) => {
-                return (
-                  <tr key={uuidv4()}>
-                    <td>{data.date}</td>
-                    <td>{data.acCar}</td>
-                    <td>{data.rtCar}</td>
-                  </tr>
-                );
-              })}
+          {loading ? (
+            <Loading />
+          ) : (
+            filteredApiData?.map((data) => {
+              return (
+                <tr key={uuidv4()}>
+                  <td>{data.date}</td>
+                  <td>{data.acCar}</td>
+                  <td>{data.rtCar}</td>
+                </tr>
+              );
+            })
+          )}
         </tbody>
       </table>
     </TableSection>
