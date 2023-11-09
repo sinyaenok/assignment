@@ -5,10 +5,62 @@ import styled from "styled-components";
 //내부
 
 const Search = () => {
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [carNumber, setCarNumber] = useState("");
-  const [searchData, setSearchData] = useState({ result: false, data: "" });
+  const [phoneNumber, setPhoneNumber] = useState(""); //휴대폰 번호
+  const [carNumber, setCarNumber] = useState(""); //차량 번호
+  const [searchedCarData, setSearchCarData] = useState([]); //차량 데이터
 
+  const API = `${import.meta.env.VITE_SEARCH_API}/${carNumber}`;
+
+  /**차량 형식에 맞는지 boolean값을 배출하는 함수 */
+  function carListBoolean(value) {
+    //100호1234
+    const sliceStr = Number(value.slice(3, 4)); //호 isNaN
+    const remainStr = Number(value.slice(0, 3) + value.slice(4)); //100 + 1234 !isNaN
+
+    //조건 : 8글자 && 3번째 글자 String && 나머지는 Number
+    if (value.length === 8 && isNaN(sliceStr) && !isNaN(remainStr)) {
+      return true;
+    }
+    return false;
+  }
+
+  /**차량 데이터 조회 필터링 함수 */
+  function carListFilter() {
+    // 1. 검색어를 입력할 시
+    if (carNumber !== "") {
+      // 1-1. 차량 형식에 맞췄을 시
+      if (carListBoolean(carNumber)) {
+        axios.get(API).then((res) => {
+          //서버 데이터를 받아와서
+          const apiData = res.data;
+          // 1-1-1. 검색어가 차량 데이터에 없을 시
+          if (!apiData.result) {
+            alert("차량번호가 없으므로 직접 차량명을 입력해주세요.");
+            // 1-1-2. 검색어가 차량 데이터에 있을 시,
+          } else {
+            setSearchCarData(apiData.data.name); //차량 데이터를 넣어줌.
+          }
+        });
+        // 1-2. 차량 형식에 맞지 않았을 시
+      } else {
+        alert("차량형식을 확인해주세요");
+      }
+    }
+    // 2. 검색어를 입력하지 않았을 시
+    else {
+      alert("차량번호를 입력해주세요!");
+    }
+  }
+  /**엔터 누르면 서버 데이터를 받아옴 */
+  const onKeyDown = (e) => {
+    if (e.key === "Enter") {
+      carListFilter();
+    }
+  };
+  /**버튼 클릭 시 서버 데이터 받아옴 */
+  const onClick = () => {
+    carListFilter();
+  };
   const carNumberInputChange = (event) => {
     setCarNumber(event.target.value);
   };
@@ -21,12 +73,6 @@ const Search = () => {
   const handleInputChange = (e) => {
     const input = e.target.value.replace(/\D/g, ""); //정규식으로 숫자외에는 제거
     setPhoneNumber(input);
-  };
-
-  const onClickEvent = () => {
-    axios.get(import.meta.env.VITE_SEARCH_API).then((res) => {
-      setSearchData(res.data);
-    });
   };
 
   return (
@@ -83,12 +129,13 @@ const Search = () => {
                     type="text"
                     value={carNumber}
                     onChange={carNumberInputChange}
-                    placeholder="예) 100호/1234"
+                    placeholder="예) 100호1234"
+                    onKeyDown={onKeyDown}
                   />
                 </div>
               </Form>
               <div className="btnBox">
-                <Button onClick={onClickEvent}>조회</Button>
+                <Button onClick={onClick}>조회</Button>
               </div>
             </CarNumber>
           </section>
@@ -99,7 +146,7 @@ const Search = () => {
               <div>
                 <input
                   placeholder="예) 쏘나타"
-                  defaultValue={searchData.data.name}
+                  defaultValue={searchedCarData}
                 />
               </div>
             </Form>
