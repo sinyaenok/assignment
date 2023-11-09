@@ -8,7 +8,7 @@ import styled from "styled-components";
 import ListSearch from "./components/ListSearch";
 import ListTable from "./components/ListTable";
 
-const List = () => {
+export default function List() {
   const [searchValue, setSearchValue] = useState(""); //검색어
   const [listData, setListData] = useState([]); //차량 리스트 데이터
   const [filteredApiData, setFilteredApiData] = useState([]); //필터링할 서버 데이터
@@ -89,7 +89,7 @@ const List = () => {
   };
 
   return (
-    <>
+    <ListContainer>
       <Header>
         <h1 className="ListTitle">내가 렌트 할 수 있는 차량은?</h1>
       </Header>
@@ -108,18 +108,20 @@ const List = () => {
       </Main>
       <Footer>
         <div className="navToSearchBtnBox">
-          <Button type="button" onClick={navigateToSearch}>
+          <StyledButton type="button" onClick={navigateToSearch}>
             비대면 렌터카 요청하기
-          </Button>
+          </StyledButton>
         </div>
       </Footer>
-    </>
+    </ListContainer>
   );
-};
-
-export default List;
+}
 
 //styled
+
+const ListContainer = styled.div`
+  max-width: 800px;
+`;
 const Header = styled.header`
   display: flex;
   justify-content: center;
@@ -130,7 +132,12 @@ const Header = styled.header`
   }
 `;
 
-const Main = styled.main``;
+const Main = styled.main`
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+`;
 const Footer = styled.footer`
   display: flex;
   justify-content: center;
@@ -140,8 +147,7 @@ const Footer = styled.footer`
     padding: 12px;
   }
 `;
-
-const Button = styled.button`
+const StyledButton = styled.button`
   background: orange;
   height: 100%;
   width: 100%;

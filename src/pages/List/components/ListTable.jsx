@@ -2,8 +2,10 @@
 import styled from "styled-components";
 import { v4 as uuidv4 } from "uuid"; //랜덤 id 생성
 
+//내부
 import Loading from "./Loading";
 
+/** 차량 데이터를 테이블로 보여주는 컴포넌트 */
 const ListTable = ({ onFilteredApiData, onLoading, onSearchSuccess }) => {
   return (
     <TableSection>
@@ -15,11 +17,13 @@ const ListTable = ({ onFilteredApiData, onLoading, onSearchSuccess }) => {
             <th>대여차량</th>
           </tr>
         </thead>
+
         <tbody>
-          {onLoading ? (
-            <Loading />
-          ) : onSearchSuccess ? (
+          {onLoading ? ( //데이터가 안받아와졌다면
+            <Loading /> //Loading 컴포넌트 출력
+          ) : onSearchSuccess ? ( //검색 성공시
             onFilteredApiData?.map((data) => {
+              //조회한 데이터 출력
               return (
                 <tr key={uuidv4()}>
                   <td>{data.date}</td>
@@ -29,6 +33,7 @@ const ListTable = ({ onFilteredApiData, onLoading, onSearchSuccess }) => {
               );
             })
           ) : (
+            //검색 실패시
             <tr>
               <td></td>
               <td>검색 차량이 없습니다.</td>
@@ -44,15 +49,15 @@ const ListTable = ({ onFilteredApiData, onLoading, onSearchSuccess }) => {
 export default ListTable;
 
 const TableSection = styled.section`
-  max-width: 800px;
   width: 100%;
   height: 100%;
   text-align: center;
-  margin: 10px 0px 0px 0px;
+  margin-top: 10px;
 
   table {
     width: 100%;
-    border-spacing: 0px;
+    height: 100%;
+    border-spacing: 0px; //테이블 사이 간격을 없애줌
   }
   th {
     font-size: 14px;

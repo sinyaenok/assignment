@@ -1,8 +1,9 @@
-//외부
+//외부 라이브러리
 import styled from "styled-components";
 
 //내부
 
+/** List의 검색창과 검색버튼을 담은 컴포넌트  */
 export default function ListSearch({
   onSearchValue,
   onHandleSearchValue,
@@ -10,60 +11,54 @@ export default function ListSearch({
   onHandleClickSearchFilter,
 }) {
   return (
-    <InputSection>
-      <Form>
-        <div className="inputbox">
-          <input
-            className="input"
-            type="text"
-            placeholder="사고가 발생한 차량명을 입력해주세요."
-            defaultValue={onSearchValue}
-            onChange={onHandleSearchValue}
-            onKeyDown={onHandleEnterPress}
-          />
-        </div>
-      </Form>
-      <div className="buttonbox">
+    <ListSection>
+      <div className="searchInputBox">
+        <input
+          className="searchInput"
+          type="text"
+          placeholder="사고가 발생한 차량명을 입력해주세요."
+          defaultValue={onSearchValue}
+          onChange={onHandleSearchValue}
+          onKeyDown={onHandleEnterPress}
+        />
+      </div>
+
+      <div className="searchBtnBox">
         <SearchBtn type="button" onClick={onHandleClickSearchFilter}>
           검색
         </SearchBtn>
       </div>
-    </InputSection>
+    </ListSection>
   );
 }
-const InputSection = styled.section`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const ListSection = styled.section`
+  width: 100%;
   height: 100%;
-  .buttonbox {
-    height: 45px;
-    width: 75px;
-  }
-`;
+  display: flex;
+  padding: 12px;
 
-const Form = styled.form`
-  width: 70%;
-  .inputbox {
+  .searchInputBox {
     padding: 12px;
     border-radius: 3px;
-    border: 1px solid #000;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    width: 80%;
   }
-  .input {
+  .searchInput {
     border: 0;
     width: 100%;
     outline: none;
   }
+  .searchBtnBox {
+    width: 20%;
+  }
 `;
 
-const Button = styled.button`
+const SearchBtn = styled.button`
   background: orange;
-  border-radius: 3px;
-  color: #fff;
-  padding: 8px 10px;
   height: 100%;
   width: 100%;
-`;
-const SearchBtn = styled(Button)`
+  color: white;
+  border-radius: 2px;
+  padding: 8px 10px;
   margin-left: 5px;
 `;
