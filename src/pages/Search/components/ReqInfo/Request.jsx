@@ -2,10 +2,11 @@
 import styled from "styled-components";
 import { useState } from "react";
 
+/** 요청사항 컴포넌트 */
 const Request = () => {
   const [reqText, setReqText] = useState(""); //요청사항 text값
-
-  const ReqTextmaxLength = 800; //요청사항 최대글자
+  /** 요청사항 최대글자 */
+  const ReqTextmaxLength = 800;
 
   /** 요청사항 change 이벤트 */
   const onChangeReqText = (e) => {
