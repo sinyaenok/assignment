@@ -15,7 +15,7 @@ const Request = () => {
   return (
     <RequestSection>
       <h3>추가 요청 사항</h3>
-      <div className="desc">
+      <div className="requsetDesc">
         <textarea
           onChange={onChangeReqText}
           maxLength={ReqTextmaxLength}
@@ -33,14 +33,14 @@ export default Request;
 
 //styled
 const RequestSection = styled.section`
-  .desc {
+  .requsetDesc {
     padding: 10px;
   }
   textarea {
+    width: 100%;
+    height: 300px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 10px;
     outline: none;
-    width: 100%;
-    height: 300px;
   }
 `;
