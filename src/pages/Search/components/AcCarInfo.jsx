@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";
 
+/** 사고차량정보 컴포넌트 */
 const AcCarInfo = () => {
   const [carNumber, setCarNumber] = useState(""); //차량 번호
   const [searchedCarData, setSearchCarData] = useState([]); //차량 데이터
