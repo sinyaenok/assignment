@@ -30,6 +30,11 @@ export default Search;
 //styled
 const SearchContainer = styled.div`
   max-width: 800px;
+  h2 {
+    font-size: 16px;
+    padding: 10px;
+  }
+
   h3 {
     font-size: 12px;
     padding: 6px;
