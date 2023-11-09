@@ -8,6 +8,7 @@ import styled from "styled-components";
 import ListSearch from "./components/ListSearch";
 import ListTable from "./components/ListTable";
 
+/** ListSearch 컴포넌트와 ListTable을 출력하는 컴포넌트 */
 export default function List() {
   const [searchValue, setSearchValue] = useState(""); //검색어
   const [listData, setListData] = useState([]); //차량 리스트 데이터
