@@ -4,10 +4,10 @@ import styled from "styled-components";
 //내부
 
 export default function ListSearch({
-  inputChange,
-  onKeyDown,
-  inputValue,
-  onClick,
+  onSearchValue,
+  onHandleSearchValue,
+  onHandleEnterPress,
+  onHandleClickSearchFilter,
 }) {
   return (
     <InputSection>
@@ -17,14 +17,14 @@ export default function ListSearch({
             className="input"
             type="text"
             placeholder="사고가 발생한 차량명을 입력해주세요."
-            defaultValue={inputValue}
-            onChange={inputChange}
-            onKeyDown={onKeyDown}
+            defaultValue={onSearchValue}
+            onChange={onHandleSearchValue}
+            onKeyDown={onHandleEnterPress}
           />
         </div>
       </Form>
       <div className="buttonbox">
-        <SearchBtn type="button" onClick={onClick}>
+        <SearchBtn type="button" onClick={onHandleClickSearchFilter}>
           검색
         </SearchBtn>
       </div>
