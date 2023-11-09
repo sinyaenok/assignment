@@ -1,3 +1,4 @@
+//외부 라이브러리
 import styled from "styled-components";
 import { useState } from "react";
 import axios from "axios";

@@ -30,11 +30,11 @@ export default Search;
 //styled
 const SearchContainer = styled.div`
   max-width: 800px;
-  /* h3 {
+  h3 {
     font-size: 12px;
     padding: 6px;
-    color: rgba(0, 0, 0, 0.65);
-  } */
+    color: gray;
+  }
 `;
 
 const Header = styled.header`
@@ -44,7 +44,7 @@ const Header = styled.header`
   left: 0;
   text-align: center;
   padding: 16px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid lightgray;
   .searchTitle {
     font-size: 18px;
   }
