@@ -35,6 +35,7 @@ const Search = () => {
           const apiData = res.data;
           // 1-1-1. 검색어가 차량 데이터에 없을 시
           if (!apiData.result) {
+            setSearchCarData([]);
             alert("차량번호가 없으므로 직접 차량명을 입력해주세요.");
             // 1-1-2. 검색어가 차량 데이터에 있을 시,
           } else {
@@ -43,11 +44,13 @@ const Search = () => {
         });
         // 1-2. 차량 형식에 맞지 않았을 시
       } else {
+        setSearchCarData([]);
         alert("차량형식을 확인해주세요");
       }
     }
     // 2. 검색어를 입력하지 않았을 시
     else {
+      setSearchCarData([]);
       alert("차량번호를 입력해주세요!");
     }
   }
