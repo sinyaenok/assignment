@@ -11,9 +11,15 @@ import Complete from "./components/Complete";
 
 /**DriverInfo와 AcCarInfo와 ReqInfo컴포넌트를 출력하는 컴포넌트 */
 const Search = () => {
+  /** 서버 데이터 기본값 상수화 */
+  const initialCarData = {
+    result: false,
+    data: { number: "", name: "" },
+  };
   const [searchCarNumber, setSearchCarNumber] = useState(""); //차량 번호
-  const [searchedCarData, setSearchCarData] = useState([]); //차량 데이터
+  const [searchedCarData, setSearchCarData] = useState(initialCarData); //차량 데이터
   const [searchedCarName, setSearchCarName] = useState(""); //차량 이름
+  const [isResult, setIsResult] = useState(searchedCarData.result); //차량 데이터 조회 성공 여부
 
   /** 서버 주소 상수화 */
   const SEARCH_API = `${import.meta.env.VITE_SEARCH_API}/${searchCarNumber}`;
@@ -43,24 +49,26 @@ const Search = () => {
           // 1-1-1. 검색어가 차량 데이터에 없을 시
           if (!apiData.result) {
             setSearchCarName("");
+            setSearchCarData(initialCarData);
             alert("차량번호가 없으므로 직접 차량명을 입력해주세요.");
             // 1-1-2. 검색어가 차량 데이터에 있을 시,
           } else {
             setSearchCarData(apiData);
             setSearchCarName(apiData.data.name); //차량 데이터를 넣어줌.
+            setIsResult(apiData.result);
           }
         });
         // 1-2. 차량 형식에 맞지 않았을 시
       } else {
         setSearchCarName("");
-        setSearchCarData([]);
+        setSearchCarData(initialCarData);
         alert("차량형식을 확인해주세요");
       }
     }
     // 2. 검색어를 입력하지 않았을 시
     else {
       setSearchCarName("");
-      setSearchCarData([]);
+      setSearchCarData(initialCarData);
       alert("차량번호를 입력해주세요!");
     }
   }
@@ -96,7 +104,7 @@ const Search = () => {
         <ReqInfo />
       </Main>
       <Footer>
-        <Complete />
+        <Complete onIsResult={isResult} onSearchedCarName={searchedCarName} />
       </Footer>
     </SearchContainer>
   );

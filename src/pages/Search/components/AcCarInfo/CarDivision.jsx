@@ -52,7 +52,8 @@ const CarDivisionSection = styled.section`
     padding: 6px;
   }
   .domesticCarBtn {
-    background-color: ${(props) => (props.$isDomestic ? "gray" : "lightgray")};
+    background-color: ${(props) =>
+      props.$isDomestic ? "orange" : "lightgray"};
     width: 100%;
     height: 100%;
   }
@@ -61,7 +62,8 @@ const CarDivisionSection = styled.section`
     padding: 6px;
   }
   .importedCarBtn {
-    background-color: ${(props) => (props.$isDomestic ? "lightgray" : "gray")};
+    background-color: ${(props) =>
+      props.$isDomestic ? "lightgray" : "orange"};
     width: 100%;
     height: 100%;
   }

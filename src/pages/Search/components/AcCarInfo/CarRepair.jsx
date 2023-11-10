@@ -52,7 +52,7 @@ const CarRepairSection = styled.section`
     padding: 6px;
   }
   .decideBtn {
-    background-color: ${(props) => (props.$isDecide ? "gray" : "lightgray")};
+    background-color: ${(props) => (props.$isDecide ? "orange" : "lightgray")};
     width: 100%;
     height: 100%;
   }
@@ -61,7 +61,7 @@ const CarRepairSection = styled.section`
     padding: 6px;
   }
   .undecidedBtn {
-    background-color: ${(props) => (props.$isDecide ? "lightgray" : "gray")};
+    background-color: ${(props) => (props.$isDecide ? "lightgray" : "orange")};
     width: 100%;
     height: 100%;
   }
