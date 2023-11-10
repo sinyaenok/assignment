@@ -374,7 +374,7 @@ Error generating stack: `+i.message+`
     outline: none;
   }
 `,$1=()=>w.jsxs(B1,{children:[w.jsx("h2",{children:"요청 정보"}),w.jsx(L1,{}),w.jsx(D1,{})]}),B1=U.section`
-  padding-bottom: 50px;
+  height: 800px;
   h2 {
     font-size: 16px;
     padding: 10px;
