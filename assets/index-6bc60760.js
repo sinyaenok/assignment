@@ -380,7 +380,7 @@ Error generating stack: `+i.message+`
     padding: 10px;
   }
 `,F1=({onIsResult:e,onSearchedCarName:t})=>{const n="https://tools.handle.im/dummy/regist",r=()=>{const o={result:e,carName:t};alert("작성완료되었습니다."),ra.post(n,o).then(i=>{console.log(i.data)}).catch(i=>{console.error(i)})};return w.jsx(M1,{children:w.jsx("button",{className:"completeBtn",disabled:!e,onClick:r,children:"작성 완료"})})},M1=U.div`
-  height: 100%;
+  height: 50px;
   width: 100%;
   .completeBtn {
     background: lightgray;
@@ -389,6 +389,7 @@ Error generating stack: `+i.message+`
     border-radius: 2px;
   }
 `,U1=()=>{const e={result:!1,data:{number:"",name:""}},[t,n]=_.useState(""),[r,o]=_.useState(e),[i,l]=_.useState(""),[s,u]=_.useState(r.result),a=`https://tools.handle.im/dummy/search/${t}`;function c(y){const k=Number(y.slice(3,4)),d=Number(y.slice(0,3)+y.slice(4));return!!(y.length===8&&isNaN(k)&&!isNaN(d))}function p(){t!==""?c(t)?ra.get(a).then(y=>{const k=y.data;k.result?(o(k),l(k.data.name),u(k.result)):(l(""),o(e),alert("차량번호가 없으므로 직접 차량명을 입력해주세요."))}):(l(""),o(e),alert("차량형식을 확인해주세요")):(l(""),o(e),alert("차량번호를 입력해주세요!"))}const m=y=>{y.key==="Enter"&&p()},v=()=>{p()},g=y=>{n(y.target.value)};return w.jsxs(V1,{children:[w.jsx(H1,{children:w.jsx("h1",{className:"searchTitle",children:"비대면 요청하기"})}),w.jsxs(W1,{children:[w.jsx(S1,{}),w.jsx(O1,{onHandleChangeSearchCarNumber:g,onHandleClickGetApi:v,onHandleEnterPressGetApi:m,onSearchCarNumber:t,onSearchedCarName:i}),w.jsx($1,{})]}),w.jsx(Q1,{children:w.jsx(F1,{onIsResult:s,onSearchedCarName:i})})]})},V1=U.div`
+  height: 100%;
   max-width: 800px;
   h2 {
     font-size: 16px;
@@ -414,10 +415,11 @@ Error generating stack: `+i.message+`
 `,W1=U.main`
   width: 100%;
 `,Q1=U.footer`
+  background-color: white;
   position: fixed;
-  width: 100%;
   max-width: 800px;
-  height: 55px;
+  width: 100%;
+  height: 250px;
   bottom: 0;
   padding: 2px 4px;
 `;function K1(){return w.jsxs(Ny,{children:[w.jsx(Us,{path:"/newassi",element:w.jsx(a1,{})}),w.jsx(Us,{path:"/newassi/search",element:w.jsx(U1,{})})]})}Bl.createRoot(document.getElementById("root")).render(w.jsxs(_y,{children:[w.jsx(Dg,{}),w.jsx(K1,{})]}));
