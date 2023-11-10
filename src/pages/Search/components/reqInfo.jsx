@@ -20,7 +20,7 @@ export default ReqInfo;
 
 //styled
 const ReqInfoSection = styled.section`
-  padding-bottom: 50px;
+  height: 800px;
   h2 {
     font-size: 16px;
     padding: 10px;
