@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 //내부 import
 import List from "./pages/List/List";
 import Search from "./pages/Search/Search";
-// import SearchTest from "./SearchTest";
 
 function App() {
   return (

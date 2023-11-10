@@ -114,6 +114,7 @@ export default Search;
 
 //styled
 const SearchContainer = styled.div`
+  height: 100%;
   max-width: 800px;
   h2 {
     font-size: 16px;
@@ -144,10 +145,11 @@ const Main = styled.main`
 `;
 
 const Footer = styled.footer`
+  background-color: white;
   position: fixed;
-  width: 100%;
   max-width: 800px;
-  height: 55px;
+  width: 100%;
+  height: 250px;
   bottom: 0;
   padding: 2px 4px;
 `;

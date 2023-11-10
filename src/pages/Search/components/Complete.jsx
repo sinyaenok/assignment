@@ -40,7 +40,7 @@ export default Complete;
 
 //styled
 const CompleteBtnBox = styled.div`
-  height: 100%;
+  height: 50px;
   width: 100%;
   .completeBtn {
     background: lightgray;
