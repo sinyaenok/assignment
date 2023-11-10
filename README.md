@@ -2,9 +2,7 @@
 
 - ## 배포 주소
 
-  > https://sinyaenok.github.io/newassi/
-  > <br>
-  > <br>
+  > https://sinyaenok.github.io/newassi/ > <br> > <br>
 
 - ## 사용 라이브러리
 

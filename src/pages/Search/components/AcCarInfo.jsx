@@ -28,7 +28,7 @@ const AcCarInfo = ({
         onHandleEnterPressGetApi={onHandleEnterPressGetApi}
         onSearchCarNumber={onSearchCarNumber}
       />
-      s
+
       <CarName onSearchedCarName={onSearchedCarName} />
       <CarDivision />
       <CarRepair />

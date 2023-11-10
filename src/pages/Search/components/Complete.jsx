@@ -12,7 +12,8 @@ const Complete = ({ onIsResult, onSearchedCarName }) => {
       result: onIsResult,
       carName: onSearchedCarName,
     };
-    console.log(PostMessage);
+    alert("작성완료되었습니다.");
+
     axios
       .post(REGIST_API, PostMessage)
       .then((response) => {
