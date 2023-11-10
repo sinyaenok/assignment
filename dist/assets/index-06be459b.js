@@ -379,7 +379,7 @@ Error generating stack: `+i.message+`
     font-size: 16px;
     padding: 10px;
   }
-`,F1=({onIsResult:e,onSearchedCarName:t})=>{const n="https://tools.handle.im/dummy/regist",r=()=>{const o={result:e,carName:t};console.log(o),ra.post(n,o).then(i=>{console.log(i.data)}).catch(i=>{console.error(i)})};return w.jsx(M1,{children:w.jsx("button",{className:"completeBtn",disabled:!e,onClick:r,children:"작성 완료"})})},M1=U.div`
+`,F1=({onIsResult:e,onSearchedCarName:t})=>{const n="https://tools.handle.im/dummy/regist",r=()=>{const o={result:e,carName:t};alert("작성완료되었습니다."),ra.post(n,o).then(i=>{console.log(i.data)}).catch(i=>{console.error(i)})};return w.jsx(M1,{children:w.jsx("button",{className:"completeBtn",disabled:!e,onClick:r,children:"작성 완료"})})},M1=U.div`
   height: 100%;
   width: 100%;
   .completeBtn {
