@@ -16,6 +16,7 @@ const Search = () => {
     result: false,
     data: { number: "", name: "" },
   };
+  const [phoneNumber, setPhoneNumber] = useState(""); //휴대폰 번호
   const [searchCarNumber, setSearchCarNumber] = useState(""); //차량 번호
   const [searchedCarData, setSearchCarData] = useState(initialCarData); //차량 데이터
   const [searchedCarName, setSearchCarName] = useState(""); //차량 이름
@@ -72,6 +73,13 @@ const Search = () => {
       alert("차량번호를 입력해주세요!");
     }
   }
+
+  /** 연락처 input change 함수 */
+  const handleChangePhoneNumber = (e) => {
+    const input = e.target.value.replace(/\D/g, ""); //정규식으로 숫자외에는 제거
+    setPhoneNumber(input);
+  };
+
   /**엔터 누르면 서버 데이터를 받아옴 */
   const handleEnterPressGetApi = (e) => {
     if (e.key === "Enter") {
@@ -93,7 +101,10 @@ const Search = () => {
         <h1 className="searchTitle">비대면 요청하기</h1>
       </Header>
       <Main>
-        <DriverInfo />
+        <DriverInfo
+          onPhoneNumber={phoneNumber}
+          onHandleChangePhoneNumber={handleChangePhoneNumber}
+        />
         <AcCarInfo
           onHandleChangeSearchCarNumber={handleChangeSearchCarNumber}
           onHandleClickGetApi={handleClickGetApi}
@@ -104,7 +115,12 @@ const Search = () => {
         <ReqInfo />
       </Main>
       <Footer>
-        <Complete onIsResult={isResult} onSearchedCarName={searchedCarName} />
+        <Complete
+          onIsResult={isResult}
+          onPhoneNumber={phoneNumber}
+          onSearchedCarName={searchedCarName}
+          onSearchCarNumber={searchCarNumber}
+        />
       </Footer>
     </SearchContainer>
   );

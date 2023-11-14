@@ -6,11 +6,14 @@ import PhoneNumber from "./DriverInfo/PhoneNumber";
 import Area from "./DriverInfo/Area";
 
 /** 운전자 정보 컴포넌트 */
-const DriverInfo = () => {
+const DriverInfo = ({ onPhoneNumber, onHandleChangePhoneNumber }) => {
   return (
     <DriverInfoSection>
       <h2 className="driverInfoTitle">운전자 정보</h2>
-      <PhoneNumber />
+      <PhoneNumber
+        onPhoneNumber={onPhoneNumber}
+        onHandleChangePhoneNumber={onHandleChangePhoneNumber}
+      />
       <Area />
     </DriverInfoSection>
   );
