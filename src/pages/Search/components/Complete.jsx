@@ -11,20 +11,17 @@ const Complete = ({
 }) => {
   /** 서버 주소 상수화 */
   const REGIST_API = import.meta.env.VITE_REGIST_API;
-
   /** !form-data로 수정 */
   const handleClickPostData = () => {
-    const PostMessage = {
-      result: onIsResult,
-      phone: onPhoneNumber,
-      carNumber: onSearchCarNumber,
-      carName: onSearchedCarName,
-    };
-    console.log("PostMessage", PostMessage);
+    const formData = new FormData();
+    formData.append("result", onIsResult); // 사고 차량 조회 성공 여부
+    formData.append("phone", onPhoneNumber); // 휴대폰 번호
+    formData.append("carName", onSearchedCarName); // 차량 이름
+    formData.append("carNumber", onSearchCarNumber); // 차량 번호
+
     axios
-      .post(REGIST_API, PostMessage)
+      .post(REGIST_API, formData)
       .then((response) => {
-        console.log("responseMessage", response.data);
         alert("작성완료되었습니다.");
       })
       .catch((error) => {

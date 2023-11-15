@@ -4,20 +4,13 @@ import { useState } from "react";
 
 /** 연락처 인증 컴포넌트 */
 const PhoneNumber = ({ onPhoneNumber, onHandleChangePhoneNumber }) => {
-  // const [phoneNumber, setPhoneNumber] = useState(""); //휴대폰 번호
   const [isAuth, setIsAuth] = useState(false); //
   const [authNumber, setAuthNumber] = useState(""); //인증 번호
   /** 인증번호 입력 최대 길이 */
   const AuthMaxLength = 6;
 
   /** input이 11자리가 되어야 활성화 */
-  // const UnDisabled = onPhoneNumber.length === 11;
-
-  // /** 연락처 input change 함수 */
-  // const handleChangePhoneNumber = (e) => {
-  //   const input = e.target.value.replace(/\D/g, ""); //정규식으로 숫자외에는 제거
-  //   setPhoneNumber(input);
-  // };
+  const UnDisabled = onPhoneNumber.length === 11;
 
   /** 인증 input change 함수 */
   const handleChangeAuthNumber = (e) => {
@@ -56,7 +49,7 @@ const PhoneNumber = ({ onPhoneNumber, onHandleChangePhoneNumber }) => {
         <div className="phoneNumberBtnBox">
           <button
             className="phoneNumberBtn"
-            // disabled={!UnDisabled}
+            disabled={!UnDisabled}
             onClick={requsetAuthNumber}
           >
             인증
